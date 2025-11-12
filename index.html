@@ -11,11 +11,21 @@
 
   <script>
     async function lookup() {
-      const term = document.getElementById('term').value;
-      const res = await fetch('https://uylksj5jbj.execute-api.eu-north-1.amazonaws.com');
-      const data = await res.json();
-      document.getElementById('result').innerText = data.definition || data.error;
+      const term = document.getElementById('term').value.trim();
+      if (!term) {
+        document.getElementById('result').innerText = "Please enter a term.";
+        return;
+      }
+      try {
+        const res = await fetch(`https://ap5me85sg7.execute-api.eu-north-1.amazonaws.com/dev/RetrieveDefinition?keyword=${encodeURIComponent(term)}`);
+        const data = await res.json();
+        document.getElementById('result').innerText =
+          data.definition || data.message || data.error || "No definition found.";
+      } catch (err) {
+        document.getElementById('result').innerText = "Error: " + err;
+      }
     }
   </script>
 </body>
 </html>
+
