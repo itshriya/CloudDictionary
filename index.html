@@ -17,7 +17,7 @@
         return;
       }
       try {
-        const res = await fetch(`https://ap5me85sg7.execute-api.eu-north-1.amazonaws.com/dev/RetrieveDefinition?keyword=${encodeURIComponent(term)}`);
+        const res = await fetch(`https://04ifkvutxd.execute-api.eu-north-1.amazonaws.com`);
         const data = await res.json();
         document.getElementById('result').innerText =
           data.definition || data.message || data.error || "No definition found.";
